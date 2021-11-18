@@ -1,18 +1,20 @@
 import requests
 import pandas as pd
 
+# use a free IEXCloud API key for this function
 def getTradeRate(symbol):
     # contact the iexcloud api servers and get the price of the selected crypto
-    api_url = f'https://cloud.iexapis.com/stable/crypto/{symbol}/price?token=pk_a967ee1668a54594b661afc25dfcc3b9'
+    api_url = f'https://cloud.iexapis.com/stable/crypto/{symbol}/price?token=[api key here]'
     raw = requests.get(api_url).json()
     price = raw['price']
     return float(price)
 
 # returns the price of the cryptocurrency as a float
 
+# use a free AlphaVantage API key for this function
 def getPriceGraph(from_currency, to_currency, start_date = None):
     # contact the alphavantage api servers and ask it for a table of the prices of the certain crypto over the past week
-    api_url = f'https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol={from_currency}&market={to_currency}&apikey=QZXD767Z4YO825A9'
+    api_url = f'https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol={from_currency}&market={to_currency}&apikey=[api key here]'
     raw_df = requests.get(api_url).json()
     # use pandas to properly align the dataframe
     df = pd.DataFrame(raw_df['Time Series (Digital Currency Daily)']).T
